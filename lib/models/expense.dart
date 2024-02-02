@@ -11,10 +11,5 @@ class Expense {
   final DateTime date;
   final Category category;
 
-  Expense(
-      {required this.title,
-      required this.amount,
-      required this.date,
-      required this.category})
-      : id = uuid.v4();
+  Expense(this.title, this.amount, this.date, this.category) : id = uuid.v4();
 }
