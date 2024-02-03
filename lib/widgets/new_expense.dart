@@ -18,6 +18,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
+  Category _selectedCategory = Category.leisure;
 
   // TextEditingControllers need to be diposed of when their container is disposed of,
   // otherwise it stays in memory and negatively affects performance
@@ -88,22 +89,32 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ],
           ),
+          const SizedBox(height: 16),
           Row(
             children: [
               DropdownButton(
-                  items: Category.values
-                      .map(
-                        (category) => DropdownMenuItem(
-                          value: category,
-                          child: Text(
-                            category.name.toString(),
-                          ),
+                value: _selectedCategory,
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(
+                          category.name.toString(),
                         ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    print(value);
-                  }),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                },
+              ),
+              const Spacer(),
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
