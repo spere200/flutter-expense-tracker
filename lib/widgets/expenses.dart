@@ -22,7 +22,10 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (ctx) => NewExpense(_addExpense));
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => NewExpense(_addExpense),
+    );
   }
 
   final List<Expense> _registeredExpenses = [
